@@ -3,4 +3,5 @@ sudo: false
 os:
   - osx
 script:
+  zsh .zshrc
   echo "welcome"
