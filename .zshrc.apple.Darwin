@@ -1,0 +1,13 @@
+killall Dock
+
+defaults delete com.apple.dock persistent-apps
+defaults delete com.apple.dock persistent-others
+defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Firefox.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm 2.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.finder ShowPathbar -int 1
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+defaults write com.apple.screensaver askForPassword -int 1

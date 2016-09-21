@@ -1,0 +1,29 @@
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" push-line
+bindkey "^L" clear-screen
+bindkey "^[[1;5D" emacs-backward-word
+bindkey "^[[1;5C" emacs-forward-word
+bindkey "^[[H" beginning-of-line # home
+bindkey "^[[F" end-of-line # end
+bindkey "^[[3~" delete-char # tmux
+bindkey "^[^[[D" backward-word # tmux os x
+bindkey "^[^[[C" forward-word # tmux os x
+bindkey "^[[1~" beginning-of-line # tmux
+bindkey "^[[2~" overwrite-mode
+bindkey "^[[3~" delete-char
+bindkey "^[[4~" end-of-line # tmux
+bindkey "^[[5~" history-search-backward
+bindkey "^[[6~" history-search-forward
+bindkey "^X" edit-command-line
+bindkey "\e\e[C" forward-word
+bindkey "\e\e[D" backward-word
+bindkey "^[OP" select-1
+bindkey "^[OQ" select-2
+bindkey "^[OR" select-3
+bindkey "^[OS" select-4
+bindkey "^[[15~" select-5
+bindkey "^[[17~" select-6
+bindkey "^[[18~" select-7
+bindkey "^[[19~" select-8

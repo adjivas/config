@@ -1,0 +1,12 @@
+if [ ! -d "$HOME/Pictures" ]; then
+  mkdir -p "$HOME/Pictures" ;
+fi
+if [ ! -f "$HOME/Pictures/drakenguard.jpg" ]; then
+  curl "http://static.zerochan.net/Furiae.full.165216.jpg" -o "$HOME/Pictures/drakenguard.jpg" ;
+fi
+
+if [ -f "$HOME/Pictures/drakenguard.jpg" ]; then
+  if type "osascript" > /dev/null; then
+    osascript -e "tell application \"System Events\" to set picture of every desktop to \"$HOME/Pictures/drakenguard.jpg\"" ;
+  fi
+fi

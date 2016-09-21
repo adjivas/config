@@ -1,0 +1,5 @@
+function git_branch_chpwd_function() {
+  export BRANCH="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+  export PS1=" $USER@%m:%~/ ($BRANCH) 𝄞 "
+}
+chpwd_functions=(${chpwd_functions[@]} "git_branch_chpwd_function")
