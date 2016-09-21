@@ -12,18 +12,18 @@ if [[ ! -e $PREFIX/cmake ]]; then
   make -C $TEMP/cmake/cmake install
 fi
 
-if [[ "$SHLVL" == "1" ]]; then
-  export PATH=$PREFIX/autoconf/autoconf-2.69/bin:$PATH
-  export DYLD_LIBRARY_PATH=$PREFIX/autoconf/autoconf-2.69/lib:$DYLD_LIBRARY_PATH
-  export AUTOCONF=$PREFIX/autoconf/autoconf-2.69/bin/autoconf
-fi
 if [[ ! -e $PREFIX/autoconf ]]; then
   mkdir -p $PREFIX/autoconf
-  tar zx -C $PREFIX/autoconf < <(curl -sSfL http://mirror0.babylon.network/gnu/autoconf/autoconf-2.69.tar.gz)
-  cd $PREFIX/autoconf/autoconf-2.69
-  $PREFIX/autoconf/autoconf-2.69/configure --prefix=$PREFIX/autoconf/autoconf-2.69
-  make -C $PREFIX/autoconf/autoconf-2.69 all
-  make -C $PREFIX/autoconf/autoconf-2.69 install
+  tar zx -C $PREFIX/autoconf < <(curl -sSfL http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz)
+  cd "$PREFIX/autoconf/autoconf-*"
+  $PREFIX/autoconf/autoconf-*/configure --prefix=$PREFIX/autoconf
+  make -C "$PREFIX/autoconf/autoconf-*" all
+  make -C "$PREFIX/autoconf/autoconf-*" install
+fi
+if [[ "$SHLVL" == "1" ]]; then
+  export PATH="$PREFIX/autoconf/autoconf-*/bin:$PATH"
+  export DYLD_LIBRARY_PATH="$PREFIX/autoconf/autoconf-*/lib:$DYLD_LIBRARY_PATH"
+  export AUTOCONF="$PREFIX/autoconf/autoconf-*/bin/autoconf"
 fi
 
 if [[ "$SHLVL" == "1" ]]; then
@@ -55,19 +55,19 @@ if [[ ! -e $PREFIX/libtool ]]; then
   make -C $PREFIX/libtool/libtool-2.4.6 install
 fi
 
-if [[ "$SHLVL" == "1" ]]; then
-  export C_INCLUDE_PATH=$PREFIX/gettext/gettext-*/include:$C_INCLUDE_PATH
-  export CPLUS_INCLUDE_PATH=$PREFIX/gettext/gettext-*/include:$CPLUS_INCLUDE_PATH
-  export PATH=$PREFIX/gettext/gettext-*/bin:$PATH
-  export DYLD_LIBRARY_PATH=$PREFIX/gettext/gettext-*/lib:$DYLD_LIBRARY_PATH
-fi
 if [[ ! -e $PREFIX/gettext ]]; then
   mkdir -p $PREFIX/gettext
   tar zx -C $PREFIX/gettext < <(curl -sSfL http://ftp.gnu.org/gnu/gettext/gettext-latest.tar.xz)
-  cd $PREFIX/gettext/gettext-*
+  cd "$PREFIX/gettext/gettext-*"
   $PREFIX/gettext/gettext-*/configure --prefix=$PREFIX/gettext --without-included-glib --without-included-libcroco
-  make -C $PREFIX/gettext/gettext-* all
-  make -C $PREFIX/gettext/gettext-* install
+  make -C "$PREFIX/gettext/gettext-*" all
+  make -C "$PREFIX/gettext/gettext-*" install
+fi
+if [[ "$SHLVL" == "1" ]]; then
+  export C_INCLUDE_PATH="$PREFIX/gettext/gettext-*/include:$C_INCLUDE_PATH"
+  export CPLUS_INCLUDE_PATH="$PREFIX/gettext/gettext-*/include:$CPLUS_INCLUDE_PATH"
+  export PATH="$PREFIX/gettext/gettext-*/bin:$PATH"
+  export DYLD_LIBRARY_PATH="$PREFIX/gettext/gettext-*/lib:$DYLD_LIBRARY_PATH"
 fi
 
 if [[ "$SHLVL" == "1" ]]; then
@@ -359,3 +359,4 @@ fi
 #   mkdir $PREFIX/graphviz
 #   tar zx -C $TEMP/graphviz <(curl -sSfL http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.38.0.tar.gz)
 #   cd $TEMP/graphviz
+#   ./configure --prefix=$PREFIX/graphviz CFLAGS="-I$PREFIX/openssl/openssl-1.0.2f/include" LDFLAGS="-L$PREFIX/openssl/openssl-1.0.2f/lib"
