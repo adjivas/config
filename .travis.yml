@@ -3,5 +3,8 @@ sudo: false
 os:
   - osx
 script:
-  zsh .zshrc
+  source .zshrc.env.Darwin 
+  source .zshrc.profile.Darwin
+  source .zshrc.prompt.Darwin
+  source .zshrc.rc.Darwin
   echo "welcome"
