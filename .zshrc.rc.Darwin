@@ -10,6 +10,22 @@ if [[ ! -e $PREFIX/cmake ]]; then
 	make -C $TEMP/cmake/cmake install
 fi
 
+export PATH=$PREFIX/ghc/bin:$PATH
+if [[ ! -e $PREFIX/ghc ]]; then
+	mkdir -p $PREFIX/ghc
+	mkdir -p $TEMP/ghc
+	tar zx -C $TEMP/ghc < <(curl -sSfL http://downloads.haskell.org/~ghc/8.0.1/ghc-8.0.1-x86_64-apple-darwin.tar.xz)
+	cd $TEMP/ghc/ghc-8.0.1
+	$TEMP/ghc/ghc-8.0.1/configure --prefix=$PREFIX/ghc
+	make -C $TEMP/ghc/ghc-8.0.1 install
+fi
+
+export PATH=$PREFIX/stack/stack-1.3.0-osx-x86_64:$PATH
+if [[ ! -e $PREFIX/stack ]]; then
+    mkdir -p $PREFIX/stack
+	tar zx -C $PREFIX/stack < <(curl -sSfL https://www.stackage.org/stack/osx-x86_64)
+fi
+
 if [[ ! -e $PREFIX/autoconf ]]; then
 	mkdir -p $PREFIX/autoconf
 	tar zx -C $PREFIX/autoconf < <(curl -sSfL http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz)
@@ -71,6 +87,7 @@ if [[ ! -e $PREFIX/intltool ]]; then
 	make -C $PREFIX/intltool/intltool-0.51.0 install
 fi
 
+export OPENSSL_DIR=$PREFIX/openssl/openssl-1.0.2f
 export OPENSSL_ROOT_DIR=$PREFIX/openssl/openssl-1.0.2f
 export OPENSSL_LIB_DIR=$PREFIX/openssl/openssl-1.0.2f/lib
 export OPENSSL_LIB_BIB=$PREFIX/openssl/openssl-1.0.2f/bin
