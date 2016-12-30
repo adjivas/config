@@ -10,20 +10,31 @@ if [[ ! -e $PREFIX/cmake ]]; then
 	make -C $TEMP/cmake/cmake install
 fi
 
-export PATH=$PREFIX/ghc/bin:$PATH
-if [[ ! -e $PREFIX/ghc ]]; then
-	mkdir -p $PREFIX/ghc
-	mkdir -p $TEMP/ghc
-	tar zx -C $TEMP/ghc < <(curl -sSfL http://downloads.haskell.org/~ghc/8.0.1/ghc-8.0.1-x86_64-apple-darwin.tar.xz)
-	cd $TEMP/ghc/ghc-8.0.1
-	$TEMP/ghc/ghc-8.0.1/configure --prefix=$PREFIX/ghc
-	make -C $TEMP/ghc/ghc-8.0.1 install
+#export PATH=$PREFIX/ghc/bin:$PATH
+#if [[ ! -e $PREFIX/ghc ]]; then
+#	mkdir -p $PREFIX/ghc
+#	mkdir -p $TEMP/ghc
+#	tar zx -C $TEMP/ghc < <(curl -sSfL http://downloads.haskell.org/~ghc/8.0.1/ghc-8.0.1-x86_64-apple-darwin.tar.xz)
+#	cd $TEMP/ghc/ghc-8.0.1
+#	$TEMP/ghc/ghc-8.0.1/configure --prefix=$PREFIX/ghc
+#	make -C $TEMP/ghc/ghc-8.0.1 install
+#fi
+
+export PATH=$PREFIX/cabal:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
+if [[ ! -e $PREFIX/cabal ]]; then
+    mkdir -p $PREFIX/cabal
+	tar zx -C $PREFIX/cabal < <(curl -sSfL https://www.haskell.org/cabal/release/cabal-install-1.24.0.0/cabal-install-1.24.0.0-x86_64-apple-darwin-yosemite.tar.gz)
 fi
 
 export PATH=$PREFIX/stack/stack-1.3.0-osx-x86_64:$PATH
+export PATH=$HOME/.stack/snapshots/x86_64-osx/lts-7.14/8.0.1/bin:$PATH
+export PATH=$HOME/.stack/programs/x86_64-osx/ghc-8.0.1/bin:$PATH
+export PATH=$HOME/.stack/global-project/.stack-work/install/x86_64-osx/lts-7.14/8.0.1/bin:$PATH
 if [[ ! -e $PREFIX/stack ]]; then
     mkdir -p $PREFIX/stack
 	tar zx -C $PREFIX/stack < <(curl -sSfL https://www.stackage.org/stack/osx-x86_64)
+	stack setup
 fi
 
 if [[ ! -e $PREFIX/autoconf ]]; then
@@ -91,7 +102,7 @@ export OPENSSL_DIR=$PREFIX/openssl/openssl-1.0.2f
 export OPENSSL_ROOT_DIR=$PREFIX/openssl/openssl-1.0.2f
 export OPENSSL_LIB_DIR=$PREFIX/openssl/openssl-1.0.2f/lib
 export OPENSSL_LIB_BIB=$PREFIX/openssl/openssl-1.0.2f/bin
-export OPENSSL_INCLUDE_DIR=$PREFIX/openssl/openssl-1.0.2f/include/openssl
+export OPENSSL_INCLUDE_DIR=$PREFIX/openssl/openssl-1.0.2f/include
 export C_INCLUDE_PATH=$OPENSSL_INCLUDE_DIR:$C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH=$OPENSSL_INCLUDE_DIR:$CPLUS_INCLUDE_PATH
 export PATH=$OPENSSL_LIB_BIB:$PATH
@@ -210,12 +221,12 @@ if [[ ! -e $PREFIX/tmux ]]; then
 	make -C $PREFIX/tmux/tmux-2.1 all
 	make -C $PREFIX/tmux/tmux-2.1 install
 	echo -e "set -g status-fg colour232\n\
-		set -g status-bg colour159\n\
-		set -g mouse-utf8 off\n\
-		set -g mouse off\n\
-		set-window-option -g window-status-fg colour236\n\
-		set-window-option -g window-status-bg colour159\n\
-		set-option -g pane-active-border-fg colour196" > $HOME/.tmux.conf
+	set -g status-bg colour159\n\
+	set -g mouse-utf8 off\n\
+	set -g mouse off\n\
+	set-window-option -g window-status-fg colour236\n\
+	set-window-option -g window-status-bg colour159\n\
+	set-option -g pane-active-border-fg colour196" > $HOME/.tmux.conf
 fi
 
 export C_INCLUDE_PATH=$PREFIX/sdl2/include/SDL2:$C_INCLUDE_PATH
@@ -274,8 +285,6 @@ if [[ ! -e $PREFIX/freetype ]]; then
 	make -C $TEMP/freetype/freetype-2.7
 	make -C $TEMP/freetype/freetype-2.7 install
 fi
-
-
 
 export PATH=$PREFIX/mercurial/bin:$PATH
 if [[ ! -e $PREFIX/mercurial ]]; then
