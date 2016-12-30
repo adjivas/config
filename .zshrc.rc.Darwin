@@ -194,8 +194,8 @@ if [[ ! -e $PREFIX/clang ]]; then
 fi
 
 export RUST_SRC_PATH=$HOME/rust
-export PATH=$RUST_SRC_PATH/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$RUST_SRC_PATH/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/.cargo/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$RUST_SRC_PATH/lib:$LD_LIBRARY_PATH
 if [[ ! -e $HOME/rust ]]; then
