@@ -319,10 +319,10 @@ export EM_CONFIG=$HOME/.emscripten
 if [[ ! -e $PREFIX/emscripten ]]; then
 	mkdir -p $PREFIX/emscripten
 	tar zx -C $PREFIX/emscripten < <(curl -sSfL https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz)
-	cd $PREFIX/emscripten/emsdk_portable
-	$PREFIX/emscripten/emsdk_portable/emsdk update
-	$PREFIX/emscripten/emsdk_portable/emsdk install sdk-incoming-64bit
-	$PREFIX/emscripten/emsdk_portable/emsdk activate sdk-incoming-64bit
+	cd $PREFIX/emscripten/emsdk-portable
+	$PREFIX/emscripten/emsdk-portable/emsdk update
+	$PREFIX/emscripten/emsdk-portable/emsdk install sdk-incoming-64bit
+	$PREFIX/emscripten/emsdk-portable/emsdk activate sdk-incoming-64bit
 fi
 
 export PATH=$PREFIX/vim/bin:$PATH
