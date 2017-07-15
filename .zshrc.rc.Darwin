@@ -6,8 +6,8 @@ if [[ ! -e $PREFIX/cmake ]]; then
 	tar zx -C $TEMP/cmake < <(curl -sSfL https://cmake.org/files/v3.5/cmake-3.5.0-rc1.tar.gz)
 	cd $TEMP/cmake/cmake-3.5.0-rc1
 	$TEMP/cmake/cmake-3.5.0-rc1/configure --prefix=$PREFIX/cmake
-	make -C $TEMP/cmake/cmake all
-	make -C $TEMP/cmake/cmake install
+	make -C $TEMP/cmake/cmake-3.5.0-rc1 all
+	make -C $TEMP/cmake/cmake-3.5.0-rc1 install
 fi
 
 #export PATH=$PREFIX/ghc/bin:$PATH
