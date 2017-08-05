@@ -326,7 +326,7 @@ if [[ ! -e $PREFIX/emscripten ]]; then
 fi
 
 export PATH=$PREFIX/vim/bin:$PATH
-if [[ ! -e $PREFIX/emscripten ]]; then
+if [[ ! -e $PREFIX/vim ]]; then
 	git clone https://github.com/vim/vim.git $TEMP/vim
 	cd $TEMP/vim
 	$TEMP/vim/configure --prefix=$PREFIX/vim \
