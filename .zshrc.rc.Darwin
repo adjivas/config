@@ -339,7 +339,7 @@ if [[ ! -e $PREFIX/vim ]]; then
 		--with-python3-config-dir=/usr/lib/python3.5/config \
 		--enable-perlinterp \
 		--enable-luainterp \
-		--enable-gui=gtk2 --enable-cscope
+		 --disable-nls
 	make -C $TEMP/vim
 	make -C $TEMP/vim install
 fi
