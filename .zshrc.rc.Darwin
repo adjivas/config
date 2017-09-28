@@ -201,6 +201,8 @@ export LD_LIBRARY_PATH=$RUST_SRC_PATH/lib:$LD_LIBRARY_PATH
 if [[ ! -e $HOME/rust ]]; then
 	curl -sL https://static.rust-lang.org/rustup.sh -o $TEMP/rustup.sh
 	sh $TEMP/rustup.sh --prefix=$HOME/rust --spec=nightly -y --disable-sudo 2> /dev/null
+	sh $TEMP/rustup.sh --prefix=$HOME/rust --add-target=asmjs-unknown-emscripten -y --disable-sudo 2> /dev/null
+	sh $TEMP/rustup.sh --prefix=$HOME/rust --add-target=wasm32-unknown-emscripten -y --disable-sudo 2> /dev/null
 fi
 
 export PATH=$PREFIX/node/node-v4.1.2-darwin-x64/bin:$PATH
