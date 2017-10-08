@@ -329,9 +329,9 @@ if [[ ! -e $PREFIX/sdl2_ttf ]]; then
 	/usr/bin/install -c -m 644 SDL2_ttf.pc $PREFIX/sdl2_ttf/lib/pkgconfig
 fi
 
-export PATH=$PREFIX/emscripten/emsdk_portable:$PATH
-export PATH=$PREFIX/emscripten/emsdk_portable/emscripten/incoming:$PATH
-export PATH=$PREFIX/emscripten/emsdk_portable/clang/fastcomp/build_incoming_64/bin:$PATH
+export PATH=$PREFIX/emscripten/emsdk-portable:$PATH
+export PATH=$PREFIX/emscripten/emsdk-portable/emscripten/incoming:$PATH
+export PATH=$PREFIX/emscripten/emsdk-portable/clang/fastcomp/build_incoming_64/bin:$PATH
 export EM_CONFIG=$HOME/.emscripten
 if [[ ! -e $PREFIX/emscripten ]]; then
 	mkdir -p $PREFIX/emscripten
