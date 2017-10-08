@@ -111,13 +111,13 @@ export DYLD_LIBRARY_PATH=$OPENSSL_LIB_DIR:$DYLD_LIBRARY_PATH
 if [[ ! -e $PREFIX/openssl ]]; then
 	mkdir -p $PREFIX/openssl/openssl-1.0.2f
 	mkdir -p $TEMP/openssl
-	tar zx -C $TEMP/openssl < <(curl -sSfL http://www.openssl.org/source/openssl-1.0.2f.tar.gz)
-	cd $TEMP/openssl/openssl-1.0.2f
-	$TEMP/openssl/openssl-1.0.2f/configure darwin64-x86_64-cc -fPIC -shared --openssldir=$PREFIX/openssl/openssl-1.0.2f --prefix=$PREFIX/openssl/openssl-1.0.2f
-	make -C $TEMP/openssl/openssl-1.0.2f all
-	lipo -create $TEMP/openssl/openssl-1.0.2f/libcrypto.1.0.0.dylib -output $PREFIX/openssl/openssl-1.0.2f/libcrypto.1.0.0.dylib
-	lipo -create $TEMP/openssl/openssl-1.0.2f/libssl.1.0.0.dylib -output $PREFIX/openssl/openssl-1.0.2f/libssl.1.0.0.dylib
-	make -C $TEMP/openssl/openssl-1.0.2f install
+	tar zx -C $TEMP/openssl < <(curl -sSfL https://www.openssl.org/source/openssl-1.0.2l.tar.gz)
+	cd $TEMP/openssl/openssl-1.0.2l
+	$TEMP/openssl/openssl-1.0.2l/configure darwin64-x86_64-cc -fPIC -shared --openssldir=$PREFIX/openssl/openssl-1.0.2l --prefix=$PREFIX/openssl/openssl-1.0.2l
+	make -C $TEMP/openssl/openssl-1.0.2l
+	lipo -create $TEMP/openssl/openssl-1.0.2l/libcrypto.1.0.0.dylib -output $PREFIX/openssl/openssl-1.0.2f/libcrypto.1.0.0.dylib
+	lipo -create $TEMP/openssl/openssl-1.0.2l/libssl.1.0.0.dylib -output $PREFIX/openssl/openssl-1.0.2f/libssl.1.0.0.dylib
+	make -C $TEMP/openssl/openssl-1.0.2l install
 fi
 
 export LIBRARY_PATH=$PREFIX/python/python2.7.2/lib:$LIBRARY_PATH
