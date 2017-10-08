@@ -82,6 +82,7 @@ if [[ ! -e $PREFIX/gettext ]]; then
 	make -C "$PREFIX/gettext/gettext-*" all
 	make -C "$PREFIX/gettext/gettext-*" install
 fi
+
 export C_INCLUDE_PATH="$PREFIX/gettext/gettext-*/include:$C_INCLUDE_PATH"
 export CPLUS_INCLUDE_PATH="$PREFIX/gettext/gettext-*/include:$CPLUS_INCLUDE_PATH"
 export PATH="$PREFIX/gettext/gettext-*/bin:$PATH"
@@ -123,6 +124,8 @@ fi
 
 export PATH=$PREFIX/libwebsockets/bin:$PATH
 export LIBRARY_PATH=$PREFIX/libwebsockets/lib:$LIBRARY_PATH
+export C_INCLUDE_PATH="$PREFIX/libwebsockets/include:$C_INCLUDE_PATH"
+export CPLUS_INCLUDE_PATH="$PREFIX/libwebsockets/include:$CPLUS_INCLUDE_PATH"
 if [[ ! -e $PREFIX/libwebsockets ]]; then
 	git clone https://github.com/warmcat/libwebsockets.git /tmp/libwebsockets
 	mkdir /tmp/libwebsockets/build
