@@ -98,11 +98,11 @@ if [[ ! -e $PREFIX/intltool ]]; then
 	make -C $PREFIX/intltool/intltool-0.51.0 install
 fi
 
-export OPENSSL_DIR=$PREFIX/openssl/openssl-1.0.2f
-export OPENSSL_ROOT_DIR=$PREFIX/openssl/openssl-1.0.2f
-export OPENSSL_LIB_DIR=$PREFIX/openssl/openssl-1.0.2f/lib
-export OPENSSL_LIB_BIB=$PREFIX/openssl/openssl-1.0.2f/bin
-export OPENSSL_INCLUDE_DIR=$PREFIX/openssl/openssl-1.0.2f/include
+export OPENSSL_DIR=$PREFIX/openssl/openssl-1.0.2l
+export OPENSSL_ROOT_DIR=$PREFIX/openssl/openssl-1.0.2l
+export OPENSSL_LIB_DIR=$PREFIX/openssl/openssl-1.0.2l/lib
+export OPENSSL_LIB_BIB=$PREFIX/openssl/openssl-1.0.2l/bin
+export OPENSSL_INCLUDE_DIR=$PREFIX/openssl/openssl-1.0.2l/include
 export C_INCLUDE_PATH=$OPENSSL_INCLUDE_DIR:$C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH=$OPENSSL_INCLUDE_DIR:$CPLUS_INCLUDE_PATH
 export PATH=$OPENSSL_LIB_BIB:$PATH
@@ -118,6 +118,18 @@ if [[ ! -e $PREFIX/openssl ]]; then
 	lipo -create $TEMP/openssl/openssl-1.0.2l/libcrypto.1.0.0.dylib -output $PREFIX/openssl/openssl-1.0.2f/libcrypto.1.0.0.dylib
 	lipo -create $TEMP/openssl/openssl-1.0.2l/libssl.1.0.0.dylib -output $PREFIX/openssl/openssl-1.0.2f/libssl.1.0.0.dylib
 	make -C $TEMP/openssl/openssl-1.0.2l install
+fi
+
+
+export PATH=$PREFIX/libwebsockets/bin:$PATH
+export LIBRARY_PATH=$PREFIX/libwebsockets/lib:$LIBRARY_PATH
+if [[ ! -e $PREFIX/libwebsockets ]]; then
+	git clone https://github.com/warmcat/libwebsockets.git /tmp/libwebsockets
+	mkdir /tmp/libwebsockets/build
+	cd /tmp/libwebsockets/build
+	cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$PREFIX/libwebsockets" -DLWS_WITH_SSL=OFF -DLWS_WITHOUT_BUILTIN_SHA1=OFF /tmp/libwebsockets
+	make -C /tmp/libwebsockets/build
+	make -C /tmp/libwebsockets/build install
 fi
 
 export LIBRARY_PATH=$PREFIX/python/python2.7.2/lib:$LIBRARY_PATH
